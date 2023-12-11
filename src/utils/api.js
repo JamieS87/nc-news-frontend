@@ -8,7 +8,6 @@ const getArticles = async () => {
 };
 
 const getArticle = async (articleId) => {
-  console.log("Getting article with ID", articleId);
   const response = await api.get(`/articles/${articleId}`);
   return response.data;
 };
