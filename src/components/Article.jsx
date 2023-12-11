@@ -2,7 +2,8 @@ import { Card, CardContent, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function Article({ article }) {
-  const { article_id, title, topic, author, created_at } = article;
+  const { article_id, title, topic, author, created_at, votes, comment_count } =
+    article;
   return (
     <Card as="article">
       <CardContent>
@@ -13,6 +14,9 @@ export default function Article({ article }) {
           by {author} at {created_at} in {topic}
         </span>
         <Link path={`/articles/${article_id}`}>Read Article</Link>
+        <Typography varaint="subtitle2">
+          {votes} votes {comment_count} comments
+        </Typography>
       </CardContent>
     </Card>
   );
