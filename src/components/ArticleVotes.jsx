@@ -1,50 +1,52 @@
 import { patchArticleVotes } from "../utils/api";
 import { useState } from "react";
-import { Stack, Button } from "@mui/material";
+import { Stack, IconButton } from "@mui/material";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 export default function ArticleVotes({ article_id, ...props }) {
   const [votes, setVotes] = useState(props.votes);
   const [hasUpVote, setHasUpVote] = useState(false);
   const [hasDownVote, setHasDownVote] = useState(false);
 
-  function addUpVote() {
+  async function addUpVote() {
     try {
       setHasUpVote(true);
       setVotes((currVotes) => currVotes + 1);
-      patchArticleVotes(article_id, 1);
+      await patchArticleVotes(article_id, 1);
     } catch (err) {
       setVotes((currVotes) => currVotes - 1);
       setHasUpVote(false);
     }
   }
 
-  function removeUpVote() {
+  async function removeUpVote() {
     try {
       setVotes((currVotes) => currVotes - 1);
       setHasUpVote(false);
-      patchArticleVotes(article_id, -1);
+      await patchArticleVotes(article_id, -1);
     } catch (err) {
       setVotes((currVotes) => currVotes + 1);
       setHasUpVote(true);
     }
   }
 
-  function addDownVote() {
+  async function addDownVote() {
     try {
       setHasDownVote(true);
       setVotes((currVotes) => currVotes - 1);
-      patchArticleVotes(article_id, -1);
+      await patchArticleVotes(article_id, -1);
     } catch (err) {
       setVotes((currVotes) => currVotes + 1);
       setHasDownVote(false);
     }
   }
 
-  function removeDownVote() {
+  async function removeDownVote() {
     try {
       setHasDownVote(false);
       setVotes((currVotes) => currVotes + 1);
-      patchArticleVotes(article_id, 1);
+      await patchArticleVotes(article_id, 1);
     } catch (err) {
       setVotes((currVotes) => currVotes - 1);
       setHasDownVote(true);
@@ -73,14 +75,14 @@ export default function ArticleVotes({ article_id, ...props }) {
     }
   }
   return (
-    <Stack direction="row">
-      <Button aria-label="upvote" onClick={handleUpVote}>
-        Upvote
-      </Button>
+    <Stack direction="row" gap={2}>
+      <IconButton aria-label="upvote" onClick={handleUpVote}>
+        <ArrowUpwardIcon sx={{ color: hasUpVote ? "red" : "" }} />
+      </IconButton>
       <p>{votes}</p>
-      <Button aria-label="downvote" onClick={handleDownVote}>
-        Downvote
-      </Button>
+      <IconButton aria-label="downvote" onClick={handleDownVote}>
+        <ArrowDownwardIcon sx={{ color: hasDownVote ? "blue" : "" }} />
+      </IconButton>
     </Stack>
   );
 }
