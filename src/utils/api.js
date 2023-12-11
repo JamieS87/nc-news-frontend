@@ -7,4 +7,9 @@ const getArticles = async () => {
   return response.data;
 };
 
-export { getArticles };
+const getArticleComments = async (article_id) => {
+  const response = await api.get(`/articles/${article_id}/comments`);
+  return response.datal;
+};
+
+export { getArticles, getArticleComments };
