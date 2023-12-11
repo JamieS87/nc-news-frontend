@@ -17,4 +17,4 @@ const getArticleComments = async (articleId) => {
   return response.data;
 };
 
-export { getArticles, getArticle, getArticleComments, getArticle };
+export { getArticles, getArticle, getArticleComments };
