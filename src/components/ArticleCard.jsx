@@ -17,7 +17,7 @@ export default function ArticleCard({ article }) {
           <Link component={RouterLink} to={`/articles/${article_id}`}>
             Read Article
           </Link>
-          <Typography variant="subtitle2" sx={{ mt: 1 }}>
+          <Typography variant="subtitle2" as="p" sx={{ mt: 1 }}>
             {votes} votes {comment_count} comments
           </Typography>
         </CardContent>
