@@ -31,6 +31,14 @@ export default function ArticleList() {
     );
   }
 
+  if (isLoading) {
+    return (
+      <div>
+        <h2>Loading Articles...</h2>
+      </div>
+    );
+  }
+
   return (
     <div>
       {articles.map((article) => {
