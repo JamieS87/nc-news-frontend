@@ -1,14 +1,18 @@
-import { Box, Stack } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Box, Stack, Link } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 
 export default function Nav() {
   return (
-    <Stack direction="row" as="nav">
+    <Stack direction="row" as="nav" sx={{ my: 3 }}>
       <Box sx={{ mr: 2 }}>
-        <Link to="/">Home</Link>
+        <Link component={RouterLink} to="/">
+          Home
+        </Link>
       </Box>
       <Box>
-        <Link to="/articles">Articles</Link>
+        <Link component={RouterLink} to="/articles">
+          Articles
+        </Link>
       </Box>
     </Stack>
   );
