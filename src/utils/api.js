@@ -7,9 +7,14 @@ const getArticles = async () => {
   return response.data;
 };
 
-const getArticleComments = async (article_id) => {
-  const response = await api.get(`/articles/${article_id}/comments`);
-  return response.datal;
+const getArticle = async (articleId) => {
+  const response = await api.get(`/articles/${articleId}`);
+  return response.data;
 };
 
-export { getArticles, getArticleComments };
+const getArticleComments = async (articleId) => {
+  const response = await api.get(`/articles/${articleId}/comments`);
+  return response.data;
+};
+
+export { getArticles, getArticle, getArticleComments };

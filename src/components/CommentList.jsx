@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CommentCard from "./CommentCard";
 import { getArticleComments } from "../utils/api";
+import { Box, Paper, Typography } from "@mui/material";
 
 export default function CommentList({ article_id }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -36,10 +37,19 @@ export default function CommentList({ article_id }) {
   }
 
   return (
-    <div>
-      {comments.map((comment) => {
-        return <CommentCard key={comment.comment_id} comment={comment} />;
-      })}
-    </div>
+    <Paper elevation={3} component="section">
+      <Box sx={{ mt: 3, p: 2 }}>
+        <Typography variant="h5" as="h2">
+          Comments
+        </Typography>
+        {comments.map((comment) => {
+          return (
+            <article key={comment.comment_id}>
+              <CommentCard comment={comment} />
+            </article>
+          );
+        })}
+      </Box>
+    </Paper>
   );
 }
