@@ -13,7 +13,7 @@ export default function Article({ article }) {
         <span>
           by {author} at {created_at} in {topic}
         </span>
-        <Link path={`/articles/${article_id}`}>Read Article</Link>
+        <Link to={`/articles/${article_id}`}>Read Article</Link>
         <Typography varaint="subtitle2">
           {votes} votes {comment_count} comments
         </Typography>
