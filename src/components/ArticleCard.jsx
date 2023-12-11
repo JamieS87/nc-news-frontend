@@ -1,7 +1,7 @@
 import { Card, CardContent, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
-export default function Article({ article }) {
+export default function ArticleCard({ article }) {
   const { article_id, title, topic, author, created_at, votes, comment_count } =
     article;
   return (
@@ -10,11 +10,11 @@ export default function Article({ article }) {
         <Typography variant="h4" as="h3">
           {title}
         </Typography>
-        <span>
+        <Typography variant="subtitle2" as="p">
           by {author} at {created_at} in {topic}
-        </span>
+        </Typography>
         <Link to={`/articles/${article_id}`}>Read Article</Link>
-        <Typography varaint="subtitle2">
+        <Typography variant="subtitle2">
           {votes} votes {comment_count} comments
         </Typography>
       </CardContent>
