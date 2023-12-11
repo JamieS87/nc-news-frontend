@@ -7,4 +7,10 @@ const getArticles = async () => {
   return response.data;
 };
 
-export { getArticles };
+const getArticle = async (articleId) => {
+  console.log("Getting article with ID", articleId);
+  const response = await api.get(`/articles/${articleId}`);
+  return response.data;
+};
+
+export { getArticles, getArticle };

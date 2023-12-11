@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getArticles } from "../utils/api";
 import ArticleCard from "./ArticleCard";
+import { Typography } from "@mui/material";
 
 export default function ArticleList() {
   const [articles, setArticles] = useState([]);
@@ -40,10 +41,10 @@ export default function ArticleList() {
   }
 
   return (
-    <div>
+    <section>
       {articles.map((article) => {
         return <ArticleCard key={article.article_id} article={article} />;
       })}
-    </div>
+    </section>
   );
 }
