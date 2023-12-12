@@ -39,11 +39,11 @@ export default function CommentList({ article_id }) {
 
   return (
     <div>
-      <Box>
+      <Box sx={{ py: 2 }}>
         <CommentAdder article_id={article_id} setComments={setComments} />
       </Box>
       <Paper elevation={3} component="section">
-        <Box sx={{ mt: 3, p: 2 }}>
+        <Box sx={{ p: 2 }}>
           <Typography variant="h5" as="h2">
             Comments
           </Typography>

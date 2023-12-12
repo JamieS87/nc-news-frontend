@@ -1,14 +1,24 @@
-import { TextField, Box, Button, Stack, Typography } from "@mui/material";
+import {
+  TextField,
+  Paper,
+  Button,
+  Stack,
+  Typography,
+  Alert,
+} from "@mui/material";
 import { useState } from "react";
 import { postArticleComment } from "../utils/api";
 
 export default function CommentAdder({ article_id, setComments }) {
   const [expanded, setExpanded] = useState(false);
   const [isPending, setIsPending] = useState(false);
+  const [isValid, setIsValid] = useState(false);
   const [commentBody, setCommentBody] = useState("");
   const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   async function handleSubmit() {
+    if (!isValid) return;
     setIsPending(true);
     const commentData = {
       username: "grumpy19",
@@ -20,10 +30,22 @@ export default function CommentAdder({ article_id, setComments }) {
       setIsPending(false);
       setCommentBody("");
       setComments((currComments) => [comment, ...currComments]);
+      setSuccess(true);
+      setIsValid(false);
     } catch (err) {
       setIsPending(false);
       setError(err);
     }
+  }
+
+  function handleCommentBodyChange(e) {
+    const commentBody = e.target.value;
+    if (commentBody.length < 10) {
+      setIsValid(false);
+    } else {
+      setIsValid(true);
+    }
+    setCommentBody(commentBody);
   }
 
   if (!expanded) {
@@ -57,40 +79,62 @@ export default function CommentAdder({ article_id, setComments }) {
   }
 
   return (
-    <Box>
-      <form>
-        <TextField
+    <Paper variant="outlined" sx={{ p: 2 }}>
+      {success ? (
+        <Alert
+          onClose={() => {
+            setSuccess(false);
+          }}
           variant="outlined"
-          label="Comment"
-          minRows={3}
-          multiline
-          fullWidth
-          value={commentBody}
-          onChange={(e) => setCommentBody(e.target.value)}
-        />
-        <Stack
-          direction="row"
-          gap={1}
-          sx={{ mt: 1 }}
-          justifyContent={"flex-end"}
+          severity="success"
         >
-          <Button
-            color="info"
-            variant="outlined"
-            onClick={() => setExpanded(false)}
-          >
-            Cancel
-          </Button>
-          <Button
-            color="primary"
-            variant="contained"
-            disabled={isPending}
-            onClick={handleSubmit}
-          >
-            Post
-          </Button>
-        </Stack>
-      </form>
-    </Box>
+          Commented posted
+        </Alert>
+      ) : (
+        <>
+          <Typography variant="h6" as="p" sx={{ mb: 2 }}>
+            Post Comment
+          </Typography>
+          <form>
+            <TextField
+              variant="outlined"
+              label="Comment"
+              minRows={3}
+              multiline
+              fullWidth
+              value={commentBody}
+              onChange={handleCommentBodyChange}
+              error={!isValid}
+              color={isValid ? "primary" : "error"}
+              helperText={
+                !isValid ? "Comment must be at least 10 characters" : ""
+              }
+            />
+            <Stack
+              direction="row"
+              gap={1}
+              sx={{ mt: 1 }}
+              justifyContent={"flex-end"}
+            >
+              <Button
+                color="info"
+                variant="outlined"
+                onClick={() => setExpanded(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                color="primary"
+                variant="contained"
+                disabled={isPending || !isValid}
+                onClick={handleSubmit}
+              >
+                Post
+              </Button>
+            </Stack>
+          </form>
+        </>
+      )}
+    </Paper>
   );
 }
