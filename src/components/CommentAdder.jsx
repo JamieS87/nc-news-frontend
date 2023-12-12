@@ -6,10 +6,12 @@ import {
   Typography,
   Alert,
 } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { postArticleComment } from "../utils/api";
+import UserContext from "../context/UserContext";
 
 export default function CommentAdder({ article_id, setComments }) {
+  const { username } = useContext(UserContext);
   const [expanded, setExpanded] = useState(false);
   const [isPending, setIsPending] = useState(false);
   const [isValid, setIsValid] = useState(false);
@@ -21,7 +23,7 @@ export default function CommentAdder({ article_id, setComments }) {
     if (!isValid) return;
     setIsPending(true);
     const commentData = {
-      username: "grumpy19",
+      username,
       body: commentBody,
     };
     try {
