@@ -42,13 +42,19 @@ export default function CommentList({ article_id }) {
         <Typography variant="h5" as="h2">
           Comments
         </Typography>
-        {comments.map((comment) => {
-          return (
-            <article key={comment.comment_id}>
-              <CommentCard comment={comment} />
-            </article>
-          );
-        })}
+        {!comments.length ? (
+          <Typography variant="h6" as="p" textAlign="center">
+            Nobody has commented on this article yet
+          </Typography>
+        ) : (
+          comments.map((comment) => {
+            return (
+              <article key={comment.comment_id}>
+                <CommentCard comment={comment} />
+              </article>
+            );
+          })
+        )}
       </Box>
     </Paper>
   );
