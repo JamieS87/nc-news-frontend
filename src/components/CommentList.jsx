@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import CommentCard from "./CommentCard";
 import { getArticleComments } from "../utils/api";
 import { Box, Paper, Typography } from "@mui/material";
+import CommentAdder from "./CommentAdder";
 
 export default function CommentList({ article_id }) {
   const [isLoading, setIsLoading] = useState(true);
