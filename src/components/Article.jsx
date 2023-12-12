@@ -51,7 +51,7 @@ export default function Article({ article_id }) {
             at {article.created_at} in {article.topic}
           </Typography>
         </Stack>
-        <Typography variant="h5" sx={{ my: 1 }}>
+        <Typography variant="h5" as="h2" sx={{ my: 1 }}>
           {article.title}
         </Typography>
         <Box
@@ -64,7 +64,7 @@ export default function Article({ article_id }) {
         <Divider sx={{ mt: 2 }} />
         <Stack direction="row" sx={{ mt: 2 }}>
           <Typography variant="body2">{article.votes} votes</Typography>
-          <Typography variant="body" sx={{ mx: "auto" }}>
+          <Typography variant="body2" sx={{ mx: "auto" }}>
             {article.comment_count} comments
           </Typography>
         </Stack>

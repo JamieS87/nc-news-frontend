@@ -12,4 +12,9 @@ const getArticle = async (articleId) => {
   return response.data;
 };
 
-export { getArticles, getArticle };
+const getArticleComments = async (articleId) => {
+  const response = await api.get(`/articles/${articleId}/comments`);
+  return response.data;
+};
+
+export { getArticles, getArticle, getArticleComments };
