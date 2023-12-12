@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getArticle } from "../utils/api";
 import { Box, Paper, Typography, Stack, Link, Divider } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
+import ArticleVotes from "./ArticleVotes";
 
 export default function Article({ article_id }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -63,7 +64,7 @@ export default function Article({ article_id }) {
         <Typography variant="body1">{article.body}</Typography>
         <Divider sx={{ mt: 2 }} />
         <Stack direction="row" sx={{ mt: 2 }}>
-          <Typography variant="body2">{article.votes} votes</Typography>
+          <ArticleVotes article_id={article_id} votes={article.votes} />
           <Typography variant="body2" sx={{ mx: "auto" }}>
             {article.comment_count} comments
           </Typography>

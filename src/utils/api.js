@@ -27,10 +27,17 @@ const deleteComment = async (commentId) => {
   return response;
 };
 
+const patchArticleVotes = async (articleId, votes) => {
+  const response = await api.patch(`/articles/${articleId}`, {
+    inc_votes: votes,
+  });
+  return response.data;
+};
+
 export {
   getArticles,
   getArticle,
   getArticleComments,
-  postArticleComment,
+  postArticleComment, patchArticleVotes,
   deleteComment,
 };
