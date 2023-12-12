@@ -22,4 +22,15 @@ const postArticleComment = async (articleId, data) => {
   return response.data;
 };
 
-export { getArticles, getArticle, getArticleComments, postArticleComment };
+const deleteComment = async (commentId) => {
+  const response = await api.delete(`/comments/${commentId}`);
+  return response;
+};
+
+export {
+  getArticles,
+  getArticle,
+  getArticleComments,
+  postArticleComment,
+  deleteComment,
+};
