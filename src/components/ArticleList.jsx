@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getArticles } from "../utils/api";
 import ArticleCard from "./ArticleCard";
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Zoom } from "@mui/material";
 import NotFound from "../routes/NotFound";
 import ApiLoading from "./ApiLoading";
 
@@ -26,7 +26,10 @@ export default function ArticleList({ sort_by, order, topic }) {
   }, [sort_by, order, topic]);
 
   if (error) {
-    if (error.response && error.response.status === 404) {
+    if (
+      error.response &&
+      (error.response.status === 404 || error.response.status === 400)
+    ) {
       return <NotFound />;
     }
     return (
@@ -43,21 +46,6 @@ export default function ArticleList({ sort_by, order, topic }) {
 
   if (!articles.length) {
     return (
-      <>
-      <Typography variant="h5" as="p">
-        No articles to show
-      </Typography>
-      <Box textAlign="center">
-        <Typography variant="h5" component="p">
-          Loading Articles...
-        </Typography>
-      </Box>
-      </>
-    );
-  }
-
-  if (!articles.length) {
-    return (
       <Typography variant="h5" as="p">
         No articles to show
       </Typography>
@@ -66,8 +54,14 @@ export default function ArticleList({ sort_by, order, topic }) {
 
   return (
     <section>
-      {articles.map((article) => {
-        return <ArticleCard key={article.article_id} article={article} />;
+      {articles.map((article, i) => {
+        return (
+          <Zoom in={true} key={article.article_id} timeout={i * 100}>
+            <Box>
+              <ArticleCard key={article.article_id} article={article} />
+            </Box>
+          </Zoom>
+        );
       })}
     </section>
   );

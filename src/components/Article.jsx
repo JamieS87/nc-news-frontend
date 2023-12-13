@@ -28,7 +28,10 @@ export default function Article({ article_id }) {
   }, [article_id]);
 
   if (error) {
-    if (error.response && error.response.status === 404) {
+    if (
+      error.response &&
+      (error.response.status === 404 || error.response.status === 400)
+    ) {
       return <NotFound />;
     }
     return (
