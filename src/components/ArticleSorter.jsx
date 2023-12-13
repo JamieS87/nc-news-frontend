@@ -1,8 +1,7 @@
 import { FormControl, MenuItem, Select, InputLabel } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 
-export default function () {
-  const [searchParams, setSearchParams] = useSearchParams();
+export default function ({ sort_by, setSortBy }) {
 
   const sortOptions = [
     { created_at: "Date" },
@@ -10,7 +9,7 @@ export default function () {
     { votes: "Votes" },
   ];
 
-  const sortByDefault = "created_at";
+  const sortBy = sort_by || "created_at";
 
   return (
     <FormControl>
@@ -18,16 +17,10 @@ export default function () {
       <Select
         labelId="article-sorter-label"
         id="article-sorter"
-        value={searchParams.get("sort_by") || sortByDefault}
+        value={sortBy}
         label="Sort By"
         onChange={(e) => {
-          setSearchParams((searchParams) => {
-            const newSearchParams = {
-              ...Object.fromEntries(searchParams.entries()),
-              sort_by: e.target.value,
-            };
-            return newSearchParams;
-          });
+          setSortBy(e.target.value);
         }}
       >
         {sortOptions.map((option) => {

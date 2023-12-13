@@ -1,12 +1,10 @@
 import { FormControl, MenuItem, Select, InputLabel } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 
-export default function () {
-  const [searchParams, setSearchParams] = useSearchParams();
-
+export default function ({ order, setOrder }) {
   const sortOptions = [{ asc: "Ascending" }, { desc: "Descending" }];
 
-  const sortByDefault = "desc";
+  const orderBy = order || "desc";
 
   return (
     <FormControl>
@@ -14,16 +12,10 @@ export default function () {
       <Select
         labelId="article-orderer-label"
         id="article-orderer"
-        value={searchParams.get("order") || sortByDefault}
+        value={orderBy}
         label="Order"
         onChange={(e) => {
-          setSearchParams((searchParams) => {
-            const newSearchParams = {
-              ...Object.fromEntries(searchParams.entries()),
-              order: e.target.value,
-            };
-            return newSearchParams;
-          });
+          setOrder(e.target.value);
         }}
       >
         {sortOptions.map((option) => {
