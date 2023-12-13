@@ -33,6 +33,15 @@ export default function TopicList() {
     );
   }
 
+  if (error) {
+    return (
+      <div>
+        <h2>Oops! - {error.response.status}</h2>
+        <p>An error occured</p>
+      </div>
+    );
+  }
+
   if (!topics.length) {
     return (
       <Typography variant="h5" as="p">
