@@ -43,23 +43,23 @@ export default function CommentList({ article_id }) {
         <CommentAdder article_id={article_id} setComments={setComments} />
       </Box>
       <Paper elevation={3} component="section">
-        <Box sx={{ p: 2 }}>
+        <Box sx={{ mt: 3, p: 2 }}>
           <Typography variant="h5" as="h2">
             Comments
           </Typography>
           {!comments.length ? (
-          <Typography variant="h6" as="p" textAlign="center">
-            Nobody has commented on this article yet
-          </Typography>
-        ) : (
-          comments.map((comment) => {
+            <Typography variant="h6" as="p" textAlign="center">
+              Nobody has commented on this article yet
+            </Typography>
+          ) : (
+            comments.map((comment) => {
               return (
                 <article key={comment.comment_id}>
-                  <CommentCard comment={comment} />
+                  <CommentCard comment={comment} setComments={setComments} />
                 </article>
               );
             })
-        )}
+          )}
         </Box>
       </Paper>
     </div>
