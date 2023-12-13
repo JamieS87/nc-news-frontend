@@ -6,6 +6,7 @@ import Nav from "./components/Nav";
 import SingleArticle from "./routes/SingleArticle";
 import Topics from "./routes/Topics";
 import SingleTopic from "./routes/SingleTopic";
+import NotFound from "./routes/NotFound";
 import "./App.css";
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           ></Route>
           <Route path="/topics" element={<Topics />}></Route>
           <Route path="/topics/:topic_slug" element={<SingleTopic />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </Container>
     </BrowserRouter>

@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { getArticles } from "../utils/api";
 import ArticleCard from "./ArticleCard";
 import { Typography, Box } from "@mui/material";
+import NotFound from "../routes/NotFound";
+import ApiLoading from "./ApiLoading";
 
 export default function ArticleList(props) {
   const [articles, setArticles] = useState([]);
@@ -25,6 +27,9 @@ export default function ArticleList(props) {
   }, [topic]);
 
   if (error) {
+    if (error.response && error.response.status === 404) {
+      return <NotFound />;
+    }
     return (
       <div>
         <h2>Oops! - {error.response.status}</h2>
@@ -34,13 +39,7 @@ export default function ArticleList(props) {
   }
 
   if (isLoading) {
-    return (
-      <Box textAlign="center">
-        <Typography variant="h5" component="p">
-          Loading Articles...
-        </Typography>
-      </Box>
-    );
+    return <ApiLoading>Loading Articles...</ApiLoading>;
   }
 
   if (!articles.length) {
