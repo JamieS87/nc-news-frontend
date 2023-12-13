@@ -19,6 +19,16 @@ const getArticleComments = async (articleId) => {
   return response.data;
 };
 
+const postArticleComment = async (articleId, data) => {
+  const response = await api.post(`/articles/${articleId}/comments`, data);
+  return response.data;
+};
+
+const deleteComment = async (commentId) => {
+  const response = await api.delete(`/comments/${commentId}`);
+  return response;
+};
+
 const patchArticleVotes = async (articleId, votes) => {
   const response = await api.patch(`/articles/${articleId}`, {
     inc_votes: votes,
@@ -35,6 +45,6 @@ export {
   getArticles,
   getArticle,
   getArticleComments,
-  patchArticleVotes,
-  getTopics,
+  postArticleComment, patchArticleVotes,
+  deleteComment, getTopics
 };
