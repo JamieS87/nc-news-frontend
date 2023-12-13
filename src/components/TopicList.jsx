@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getTopics } from "../utils/api";
 import TopicCard from "./TopicCard";
-import { Typography } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 
 export default function TopicList() {
   const [topics, setTopics] = useState([]);
@@ -22,6 +22,16 @@ export default function TopicList() {
     }
     fetchTopics();
   }, []);
+
+  if (isLoading) {
+    return (
+      <Box textAlign="center">
+        <Typography variant="h5" component="p">
+          Loading Topics...
+        </Typography>
+      </Box>
+    );
+  }
 
   if (!topics.length) {
     return (
