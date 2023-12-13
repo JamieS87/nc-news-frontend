@@ -47,5 +47,6 @@ export {
   getArticleComments,
   postArticleComment,
   patchArticleVotes,
-  deleteComment, getTopics
+  deleteComment,
+  getTopics,
 };

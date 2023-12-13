@@ -44,6 +44,21 @@ export default function ArticleList({ sort_by, order, topic }) {
 
   if (!articles.length) {
     return (
+      <>
+      <Typography variant="h5" as="p">
+        No articles to show
+      </Typography>
+      <Box textAlign="center">
+        <Typography variant="h5" component="p">
+          Loading Articles...
+        </Typography>
+      </Box>
+      </>
+    );
+  }
+
+  if (!articles.length) {
+    return (
       <Typography variant="h5" as="p">
         No articles to show
       </Typography>

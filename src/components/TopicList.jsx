@@ -17,21 +17,11 @@ export default function TopicList() {
         setTopics(topics);
       } catch (err) {
         setIsLoading(false);
-        setError(error);
+        setError(err);
       }
     }
     fetchTopics();
   }, []);
-
-  if (error) {
-    console.log("Error");
-    return (
-      <div>
-        <h2>Oops! - {error.response.status}</h2>
-        <p>An error occured</p>
-      </div>
-    );
-  }
 
   if (isLoading) {
     return (
@@ -40,6 +30,15 @@ export default function TopicList() {
           Loading Topics...
         </Typography>
       </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <div>
+        <h2>Oops! - {error.message || error.response.status}</h2>
+        <p>An error occured</p>
+      </div>
     );
   }
 
