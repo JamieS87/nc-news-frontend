@@ -1,12 +1,14 @@
-import { Typography, Box } from "@mui/material";
+import { Typography, AppBar, Toolbar, Container } from "@mui/material";
 export default function Header() {
   return (
-    <header>
-      <Box sx={{ py: 2 }}>
-        <Typography variant="h3" as="h1">
-          NC News
-        </Typography>
-      </Box>
-    </header>
+    <AppBar elevation={1}>
+      <Container disableGutters>
+        <Toolbar>
+          <Typography variant="h5" as="h1" fontWeight="bold">
+            NC News
+          </Typography>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 }
