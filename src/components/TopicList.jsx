@@ -1,29 +1,30 @@
 import { useEffect, useState } from "react";
-import { getArticles } from "../utils/api";
-import ArticleCard from "./ArticleCard";
+import { getTopics } from "../utils/api";
+import TopicCard from "./TopicCard";
 import { Typography, Box } from "@mui/material";
 
-export default function ArticleList({ sort_by, order, topic }) {
-  const [articles, setArticles] = useState([]);
+export default function TopicList() {
+  const [topics, setTopics] = useState([]);
+  const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(false);
 
   useEffect(() => {
-    async function fetchArticles() {
+    async function fetchTopics() {
       try {
         setIsLoading(true);
-        const { articles } = await getArticles({ sort_by, order, topic });
+        const { topics } = await getTopics();
         setIsLoading(false);
-        setArticles(articles);
+        setTopics(topics);
       } catch (err) {
         setIsLoading(false);
-        setError(err);
+        setError(error);
       }
     }
-    fetchArticles();
-  }, [sort_by, order, topic]);
+    fetchTopics();
+  }, []);
 
   if (error) {
+    console.log("Error");
     return (
       <div>
         <h2>Oops! - {error.response.status}</h2>
@@ -36,24 +37,28 @@ export default function ArticleList({ sort_by, order, topic }) {
     return (
       <Box textAlign="center">
         <Typography variant="h5" component="p">
-          Loading Articles...
+          Loading Topics...
         </Typography>
       </Box>
     );
   }
 
-  if (!articles.length) {
+  if (!topics.length) {
     return (
       <Typography variant="h5" as="p">
-        No articles to show
+        No topics to show
       </Typography>
     );
   }
 
   return (
     <section>
-      {articles.map((article) => {
-        return <ArticleCard key={article.article_id} article={article} />;
+      {topics.map((topic) => {
+        return (
+          <article key={topic.slug}>
+            <TopicCard topic={topic} />
+          </article>
+        );
       })}
     </section>
   );

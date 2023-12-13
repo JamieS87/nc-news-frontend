@@ -36,11 +36,16 @@ const patchArticleVotes = async (articleId, votes) => {
   return response.data;
 };
 
+const getTopics = async () => {
+  const response = await api.get("/topics");
+  return response.data;
+};
+
 export {
   getArticles,
   getArticle,
   getArticleComments,
   postArticleComment,
   patchArticleVotes,
-  deleteComment,
+  deleteComment, getTopics
 };

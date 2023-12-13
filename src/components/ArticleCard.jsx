@@ -11,7 +11,7 @@ export default function ArticleCard({ article }) {
           <Typography variant="subtitle2" as="p">
             by {author} at {created_at} in {topic}
           </Typography>
-          <Typography variant="h6" as="h2" sx={{ my: 2 }}>
+          <Typography variant="h6" as="h2" sx={{ my: 2 }} fontWeight="bold">
             {title}
           </Typography>
           <Link component={RouterLink} to={`/articles/${article_id}`}>
