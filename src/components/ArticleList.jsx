@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { getArticles } from "../utils/api";
 import ArticleCard from "./ArticleCard";
-import { Typography } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 
-export default function ArticleList() {
+export default function ArticleList(props) {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [topic, setTopic] = useState(props.topic);
 
   useEffect(() => {
     async function fetchArticles() {
       try {
         setIsLoading(true);
-        const { articles } = await getArticles();
+        const { articles } = await getArticles(topic);
         setIsLoading(false);
         setArticles(articles);
       } catch (err) {
@@ -21,7 +22,7 @@ export default function ArticleList() {
       }
     }
     fetchArticles();
-  }, []);
+  }, [topic]);
 
   if (error) {
     return (
@@ -34,9 +35,19 @@ export default function ArticleList() {
 
   if (isLoading) {
     return (
-      <div>
-        <h2>Loading Articles...</h2>
-      </div>
+      <Box textAlign="center">
+        <Typography variant="h5" component="p">
+          Loading Articles...
+        </Typography>
+      </Box>
+    );
+  }
+
+  if (!articles.length) {
+    return (
+      <Typography variant="h5" as="p">
+        No articles to show
+      </Typography>
     );
   }
 

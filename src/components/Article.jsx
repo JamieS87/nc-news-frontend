@@ -44,7 +44,7 @@ export default function Article({ article_id }) {
   return (
     <Paper sx={{ p: 2, mt: 3 }} elevation={3}>
       <Stack>
-        <Stack direction="row">
+        <Stack direction="row" alignItems="center">
           <Typography variant="subtitle2" as="p">
             <Link component={RouterLink} to={`/users/${article.author}`}>
               {article.author}
@@ -63,7 +63,7 @@ export default function Article({ article_id }) {
         />
         <Typography variant="body1">{article.body}</Typography>
         <Divider sx={{ mt: 2 }} />
-        <Stack direction="row" sx={{ mt: 2 }}>
+        <Stack direction="row" sx={{ mt: 2 }} alignItems="center">
           <ArticleVotes article_id={article_id} votes={article.votes} />
           <Typography variant="body2" sx={{ mx: "auto" }}>
             {article.comment_count} comments
