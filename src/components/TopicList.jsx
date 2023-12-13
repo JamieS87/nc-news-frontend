@@ -17,7 +17,7 @@ export default function TopicList() {
         setTopics(topics);
       } catch (err) {
         setIsLoading(false);
-        setError(error);
+        setError(err);
       }
     }
     fetchTopics();
@@ -30,6 +30,15 @@ export default function TopicList() {
           Loading Topics...
         </Typography>
       </Box>
+    );
+  }
+
+  if (error) {
+    return (
+      <div>
+        <h2>Oops! - {error.message || error.response.status}</h2>
+        <p>An error occured</p>
+      </div>
     );
   }
 

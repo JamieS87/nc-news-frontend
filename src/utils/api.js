@@ -2,10 +2,10 @@ import axios from "axios";
 
 const api = axios.create({ baseURL: "https://nc-news-bdi7.onrender.com/api" });
 
-const getArticles = async (topic) => {
-  const response = await api.get("/articles", {
-    params: topic ? { topic } : "",
-  });
+const getArticles = async (
+  params = { sort_by: "created_at", order: "desc", topic: "" }
+) => {
+  const response = await api.get("/articles", { params: { ...params } });
   return response.data;
 };
 
@@ -45,6 +45,8 @@ export {
   getArticles,
   getArticle,
   getArticleComments,
-  postArticleComment, patchArticleVotes,
-  deleteComment, getTopics
+  postArticleComment,
+  patchArticleVotes,
+  deleteComment,
+  getTopics,
 };
