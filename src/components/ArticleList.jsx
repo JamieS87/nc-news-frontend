@@ -5,17 +5,16 @@ import { Typography, Box } from "@mui/material";
 import NotFound from "../routes/NotFound";
 import ApiLoading from "./ApiLoading";
 
-export default function ArticleList(props) {
+export default function ArticleList({ sort_by, order, topic }) {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [topic, setTopic] = useState(props.topic);
 
   useEffect(() => {
     async function fetchArticles() {
       try {
         setIsLoading(true);
-        const { articles } = await getArticles(topic);
+        const { articles } = await getArticles({ sort_by, order, topic });
         setIsLoading(false);
         setArticles(articles);
       } catch (err) {
@@ -24,7 +23,7 @@ export default function ArticleList(props) {
       }
     }
     fetchArticles();
-  }, [topic]);
+  }, [sort_by, order, topic]);
 
   if (error) {
     if (error.response && error.response.status === 404) {
@@ -40,6 +39,21 @@ export default function ArticleList(props) {
 
   if (isLoading) {
     return <ApiLoading>Loading Articles...</ApiLoading>;
+  }
+
+  if (!articles.length) {
+    return (
+      <>
+      <Typography variant="h5" as="p">
+        No articles to show
+      </Typography>
+      <Box textAlign="center">
+        <Typography variant="h5" component="p">
+          Loading Articles...
+        </Typography>
+      </Box>
+      </>
+    );
   }
 
   if (!articles.length) {
