@@ -43,6 +43,14 @@ export default function ArticleList(props) {
     );
   }
 
+  if (!articles.length) {
+    return (
+      <Typography variant="h5" as="p">
+        No articles to show
+      </Typography>
+    );
+  }
+
   return (
     <section>
       {articles.map((article) => {

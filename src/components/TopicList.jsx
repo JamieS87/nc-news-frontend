@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getTopics } from "../utils/api";
 import TopicCard from "./TopicCard";
+import { Typography } from "@mui/material";
 
 export default function TopicList() {
   const [topics, setTopics] = useState([]);
@@ -21,6 +22,14 @@ export default function TopicList() {
     }
     fetchTopics();
   }, []);
+
+  if (!topics.length) {
+    return (
+      <Typography variant="h5" as="p">
+        No topics to show
+      </Typography>
+    );
+  }
 
   return (
     <section>
