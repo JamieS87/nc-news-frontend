@@ -5,7 +5,7 @@ import { Typography, Box, Zoom } from "@mui/material";
 import NotFound from "../routes/NotFound";
 import ApiLoading from "./ApiLoading";
 
-export default function ArticleList({ sort_by, order, topic }) {
+export default function ArticleList({ sort_by, order, topic, limit }) {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -14,7 +14,12 @@ export default function ArticleList({ sort_by, order, topic }) {
     async function fetchArticles() {
       try {
         setIsLoading(true);
-        const { articles } = await getArticles({ sort_by, order, topic });
+        const { articles } = await getArticles({
+          sort_by,
+          order,
+          topic,
+          limit,
+        });
         setIsLoading(false);
         setArticles(articles);
       } catch (err) {
@@ -23,7 +28,7 @@ export default function ArticleList({ sort_by, order, topic }) {
       }
     }
     fetchArticles();
-  }, [sort_by, order, topic]);
+  }, [sort_by, order, topic, limit]);
 
   if (error) {
     if (

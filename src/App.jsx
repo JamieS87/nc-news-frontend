@@ -8,6 +8,7 @@ import Topics from "./routes/Topics";
 import SingleTopic from "./routes/SingleTopic";
 import NotFound from "./routes/NotFound";
 import "./App.css";
+import Home from "./routes/Home";
 function App() {
   return (
     <BrowserRouter>
@@ -15,6 +16,7 @@ function App() {
       <Nav />
       <Container>
         <Routes>
+          <Route path="/" element={<Home />}></Route>
           <Route path="/articles" element={<Articles />}></Route>
           <Route
             path="/articles/:article_id"

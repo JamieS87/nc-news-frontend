@@ -3,7 +3,7 @@ import axios from "axios";
 const api = axios.create({ baseURL: "https://nc-news-bdi7.onrender.com/api" });
 
 const getArticles = async (
-  params = { sort_by: "created_at", order: "desc", topic: "" }
+  params = { sort_by: "created_at", order: "desc", topic: "", limit: 10 }
 ) => {
   const response = await api.get("/articles", { params: { ...params } });
   return response.data;
