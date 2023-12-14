@@ -7,9 +7,8 @@ export default function SingleArticle() {
 
   return (
     <section>
-      <Article article_id={article_id} />
       <UserContext.Provider value={{ username: "grumpy19" }}>
-        <CommentList article_id={article_id} />
+        <Article article_id={article_id} />
       </UserContext.Provider>
     </section>
   );

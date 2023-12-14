@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { getTopics } from "../utils/api";
 import TopicCard from "./TopicCard";
 import { Typography, Box } from "@mui/material";
+import NotFound from "../routes/NotFound";
+import ApiLoading from "./ApiLoading";
 
 export default function TopicList() {
   const [topics, setTopics] = useState([]);
@@ -24,13 +26,7 @@ export default function TopicList() {
   }, []);
 
   if (isLoading) {
-    return (
-      <Box textAlign="center">
-        <Typography variant="h5" component="p">
-          Loading Topics...
-        </Typography>
-      </Box>
-    );
+    return <ApiLoading>Loading Topics...</ApiLoading>;
   }
 
   if (error) {
